@@ -54,9 +54,12 @@ def create_and_save_vectorstore(chunks, save_dir):
     vectorstore = FAISS.from_texts(chunks, embedding=embedding_model)
     vectorstore.save_local(folder_path=save_dir)
     return vectorstore
-
 def load_vectorstore(save_dir):
-    return FAISS.load_local(folder_path=save_dir, embeddings=embedding_model)
+    return FAISS.load_local(
+        folder_path=save_dir,
+        embeddings=embedding_model,
+        allow_dangerous_deserialization=True  # 👈 REQUIRED
+    )
 
 def run_qa_chain(vectorstore, query):
     retriever = vectorstore.as_retriever(search_kwargs={"k": 3})  # Only top 3 chunks
