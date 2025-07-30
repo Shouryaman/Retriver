@@ -1,1 +1,7 @@
 .env
+# Ignore Python virtual environment
+Retriver/Lib/
+Retriver/Include/
+Retriver/Scripts/
+Retriver/*.pyc
+Retriver/_pycache_/
